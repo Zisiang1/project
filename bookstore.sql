@@ -2,8 +2,8 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 17, 2022 at 03:57 AM
+-- Host: localhost:3306
+-- Generation Time: Jan 17, 2022 at 04:31 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.33
 
@@ -47,6 +47,28 @@ CREATE TABLE `customer` (
 INSERT INTO `customer` (`Name`, `Password`, `Date_Of_Birth`, `Email`, `Phone_Number`, `Address`, `Address2`, `City`, `State`, `Zip`) VALUES
 ('tayyuda', '123', '2022-01-21', 'tayyuda@gmail.com', 123123, '11 Pasir Ris Street 11 07-647, Singapore Singapore 510112, SGP', '312', 'Singapore', 'daasdd', 513123);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `id` int(20) NOT NULL,
+  `title` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `author` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `genre` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `title`, `author`, `description`, `genre`, `image`) VALUES
+(1, 'Book', 'Author', 'Synopsis', 'genre', 'image');
+
 --
 -- Indexes for dumped tables
 --
@@ -56,6 +78,22 @@ INSERT INTO `customer` (`Name`, `Password`, `Date_Of_Birth`, `Email`, `Phone_Num
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`Name`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
