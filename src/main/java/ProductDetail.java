@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 public class ProductDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	// Step 1: Prepare list of variables used for database connections
+	private String jdbcURL = "jdbc:mysql://localhost:3306/bookstore";
+	private String jdbcUsername = "root";
+	private String jdbcPassword = "password";
+	
     /**
      * @see HttpServlet#HttpServlet()
      */

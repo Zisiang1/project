@@ -1,5 +1,6 @@
 public class Product {
 	private int id;
+	//private String id;
 	private String title;
 	private String author;
 	private String description;
