@@ -73,7 +73,6 @@
 						<th>genre</th>
 						<th>image</th>
 						<th>link</th>
-						<th>Book Now</th>
 						<th>Add to Favorite</th>
 					</tr>
 				</thead>
@@ -88,8 +87,7 @@
 							<td><c:out value="${product.description}" /></td>
 							<td><c:out value="${product.genre}" /></td>
 							<td><c:out value="${product.image}" /></td>
-							<td><a href="">To product detail</a></td>
-							<td><a href="">Book Now</a></td>
+							<td><a href="productDetail?id=<c:out value="${product.id}" />">To product detail</a></td>
 							<td><a href="">Add to Favorite</a></td>
 							<!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
 							<!-- <td><a href="edit?name=<c:out value='${user.name}' />">Edit</a>

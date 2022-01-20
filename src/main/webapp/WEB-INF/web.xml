@@ -16,6 +16,10 @@
 		<servlet-name>ProfileServlet</servlet-name>
 		<servlet-class>ProfileServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ProductServlet</servlet-name>
+		<servlet-class>ProductServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>ProfileServlet</servlet-name>
@@ -24,4 +28,10 @@
 		<url-pattern>/ProfileServlet/update</url-pattern>
 		<url-pattern>/ProfileServlet/delete</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ProductServlet</servlet-name>
+		<url-pattern>/ProductServlet/home</url-pattern>
+		<url-pattern>/ProductServlet/productDetail</url-pattern>
+</servlet-mapping>
 </web-app>

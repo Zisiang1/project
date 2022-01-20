@@ -6,7 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -32,6 +31,7 @@ public class ProductServlet extends HttpServlet {
 	// Step 2: Prepare list of SQL prepared statements to perform CRUD to our
 	// database
 	private static final String SELECT_ALL_PRODUCTS = "select * from product";
+	private static final String SELECT_PRODUCT_BY_ID = "select * from product where id = ?";
 
 	// Step 3: Implement the getConnection method which facilitates connection to
 	// the database via JDBC
@@ -54,7 +54,7 @@ public class ProductServlet extends HttpServlet {
 	public ProductServlet() {
 		super();
 		// TODO Auto-generated constructor stub
-		
+
 	}
 
 	/**
@@ -71,17 +71,13 @@ public class ProductServlet extends HttpServlet {
 		String action = request.getServletPath();
 		try {
 			switch (action) {
-			case "/insert":
+			case "/ProductServlet/productDetail":
+				productDetailsPage(request, response);
 				break;
-			case "/delete":
-				break;
-			case "/edit":
-				break;
-			case "/update":
-				break;
-			default:
-				listProduct(request, response);
-				break;
+			case "/ProductServlet/home":
+				 listProduct(request, response);
+				 break;
+
 			}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
@@ -100,11 +96,9 @@ public class ProductServlet extends HttpServlet {
 
 	private void listProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-	
+
 		List<Product> products = new ArrayList<>();
-		
-        
-        
+
 		try (Connection connection = getConnection();
 				// Step 5.1: Create a statement using connection object
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_PRODUCTS);) {
@@ -119,7 +113,7 @@ public class ProductServlet extends HttpServlet {
 				String genre = rs.getString("genre");
 				String image = rs.getString("image");
 
-				products.add(new Product(id,title,author,description,genre,image));
+				products.add(new Product(id, title, author, description, genre, image));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -128,6 +122,41 @@ public class ProductServlet extends HttpServlet {
 		// product.jsp
 		request.setAttribute("listProduct", products);
 		request.getRequestDispatcher("/product.jsp").forward(request, response);
+	}
+
+	// method to get parameter, query database for existing product data and
+	// redirect to product detail page
+	private void productDetailsPage(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
+		// get parameter
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		Product productDetail = new Product(id, "", "", "", "", "");
+
+		// Step 1: Establish a connection
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_BY_ID);) {
+			preparedStatement.setLong(1, id);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+			// Step 4: Process the ResultSet object
+			while (rs.next()) {
+				id = Integer.parseInt(rs.getString("id"));
+				String title = rs.getString("title");
+				String author = rs.getString("author");
+				String description = rs.getString("description");
+				String genre = rs.getString("genre");
+				String image = rs.getString("image");
+				productDetail = new Product(id, title, author, description, genre, image);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		// Step 5: Set existingUser to request and serve up the userEdit form
+		request.setAttribute("product", productDetail);
+		request.getRequestDispatcher("/productDetail.jsp").forward(request, response);
+		System.out.println(productDetail);
 	}
 
 }

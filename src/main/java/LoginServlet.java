@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 	 private String jdbcUsername = "root";
 	 private String jdbcPassword = "password";
 	
-	 private static final String SELECT_ALL_USERS = "select * from customer where Name= ? and Password=? ";
+	 private static final String SELECT_ALL_USERS = "select * from customer where name= ? and password=? ";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 
 	        		
 
-	        		response.sendRedirect("http://localhost:8090/GroupProject/ProductServlet");
+	        		response.sendRedirect("http://localhost:8090/GroupProject/ProductServlet/home");
 	        		
 	        	}
 	        	
