@@ -62,27 +62,7 @@ public class LoginServlet extends HttpServlet {
 	        PrintWriter out = response.getWriter();
 	        String n = request.getParameter("username");
 	        String p = request.getParameter("password");
-	    
-//	        try {
-//	             Class.forName("com.mysql.jdbc.Driver");
-//	             Connection con = DriverManager.getConnection(
-//	             "jdbc:mysql://localhost:3306/bookstore", "root", "password");
-//	             PreparedStatement ps = con.prepareStatement("SELECT * FROM `customer` WHERE Name = ?AND Password= ?");
-//	             
-//	             ps.setString(1, n);
-//	             ps.setString(2, p);
-//	           
-//	             int i = ps.executeUpdate();
-//	             if (i > 0){
-//	                 PrintWriter writer = response.getWriter();
-//	                 writer.println("Succeed");
-//	                 writer.close();
-//	             }
-//	        }
-//	        catch (Exception exception) {
-//	             System.out.println(exception);
-//	             out.close();
-//	            }
+	   
 	    	
 	        try (Connection connection = getConnection();
 	        		
@@ -99,11 +79,15 @@ public class LoginServlet extends HttpServlet {
 	        	
 	        	{        		
 	        		String name = rs.getString("name");
+
 	        		
 	        		HttpSession session = request.getSession();
                     session.setAttribute("Username", name);
                     var user= session.getAttribute("Username");
                     System.out.println(user);
+
+	        		
+
 	        		response.sendRedirect("http://localhost:8090/GroupProject/ProductServlet");
 	        		
 	        	}

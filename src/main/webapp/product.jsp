@@ -12,44 +12,45 @@
 <title>Insert title here</title>
 </head>
 
-<style>
-/* Add a black background color to the top navigation */
-.topnav {
-  background-color: #333;
-  overflow: hidden;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-</style>
-
 <body>
 
-<div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="<%=request.getContextPath()%>/ProfileServlet/profile">Profile</a>
-  <a href="#contact">Login</a>
-  <a href="#about">Sign Up</a>
-</div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=request.getContextPath()%>/ProfileServlet/profile">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
 
 	<div class="row">
 		<div class="container">
@@ -72,6 +73,8 @@
 						<th>genre</th>
 						<th>image</th>
 						<th>link</th>
+						<th>Book Now</th>
+						<th>Add to Favorite</th>
 					</tr>
 				</thead>
 				<!-- Pass in the list of users receive via the Servlet’s response to a loop -->
@@ -86,6 +89,8 @@
 							<td><c:out value="${product.genre}" /></td>
 							<td><c:out value="${product.image}" /></td>
 							<td><a href="">To product detail</a></td>
+							<td><a href="">Book Now</a></td>
+							<td><a href="">Add to Favorite</a></td>
 							<!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
 							<!-- <td><a href="edit?name=<c:out value='${user.name}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a
