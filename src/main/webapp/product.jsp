@@ -46,7 +46,7 @@
 
 <div class="topnav">
   <a class="active" href="#home">Home</a>
-  <a href="#news">Profile</a>
+  <a href="<%=request.getContextPath()%>/ProfileServlet/profile">Profile</a>
   <a href="#contact">Login</a>
   <a href="#about">Sign Up</a>
 </div>

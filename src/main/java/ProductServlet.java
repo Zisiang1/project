@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -53,6 +54,7 @@ public class ProductServlet extends HttpServlet {
 	public ProductServlet() {
 		super();
 		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
@@ -98,7 +100,11 @@ public class ProductServlet extends HttpServlet {
 
 	private void listProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+	
 		List<Product> products = new ArrayList<>();
+		
+        
+        
 		try (Connection connection = getConnection();
 				// Step 5.1: Create a statement using connection object
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_PRODUCTS);) {

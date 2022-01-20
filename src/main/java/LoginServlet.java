@@ -13,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.sql.Connection; 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement; 
@@ -97,8 +99,12 @@ public class LoginServlet extends HttpServlet {
 	        	
 	        	{        		
 	        		String name = rs.getString("name");
-	        		System.out.println(name);
-	        		response.sendRedirect("http://localhost:8090/GroupProject/register.jsp");
+	        		
+	        		HttpSession session = request.getSession();
+                    session.setAttribute("Username", name);
+                    var user= session.getAttribute("Username");
+                    System.out.println(user);
+	        		response.sendRedirect("http://localhost:8090/GroupProject/ProductServlet");
 	        		
 	        	}
 	        	
