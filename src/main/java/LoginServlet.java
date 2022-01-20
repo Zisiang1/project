@@ -79,10 +79,15 @@ public class LoginServlet extends HttpServlet {
 	        	
 	        	{        		
 	        		String name = rs.getString("name");
-	        		System.out.println(name);
+
+	        		
 	        		HttpSession session = request.getSession();
-	        		session.setAttribute("Username", name);
-	        		var user= session.getAttribute("Username");
+                    session.setAttribute("Username", name);
+                    var user= session.getAttribute("Username");
+                    System.out.println(user);
+
+	        		
+
 	        		response.sendRedirect("http://localhost:8090/GroupProject/ProductServlet");
 	        		
 	        	}
