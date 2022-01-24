@@ -20,15 +20,36 @@
 			<a class="navbar-brand"> User Management Application </a>
 		</div>
 		<ul class="navbar-nav">
-			<li><a
-				href="<%=request.getContextPath()%>/ProductServlet/home"
+			<li><a href="<%=request.getContextPath()%>/ProductServlet/home"
 				class="nav-link">Back to home</a></li>
 		</ul>
 	</nav>
-	
-	<p>Title: <c:out value="${product.title}" /></p>
-	
-	<td><a href="">Book Now</a></td>
 
+	<form  method="post">
+		<p>
+			Title:
+			<input readonly="readonly" value="${product.title}" name="title" />
+		</p>
+
+		<p>
+			Image:
+			<input readonly="readonly" value="${product.image}" name="img" />
+		</p>
+
+		<p>
+			Price:
+			<input readonly="readonly" value="${product.price}" name="price" />
+		</p>
+
+
+		<input type="submit" value="Add To Cart" />
+	</form>
+
+
+	<!-- <form>
+		<label for="quantity">Quantity:</label> 
+		<input type="number" id="quantity" name="quantity" min="1" max="10">
+		<input type="submit">
+	</form> -->
 </body>
 </html>
