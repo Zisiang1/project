@@ -1,18 +1,24 @@
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 
@@ -32,6 +38,8 @@ public class ProductServlet extends HttpServlet {
 	// database
 	private static final String SELECT_ALL_PRODUCTS = "select * from product";
 	private static final String SELECT_PRODUCT_BY_ID = "select * from product where id = ?";
+	private static final String INSERT_INTO_CART = "insert into cart (bookid, username, book, img, paid, price, quantity, totalcost ) values(?,?,?,?,?,?,?,?)";
+
 
 	// Step 3: Implement the getConnection method which facilitates connection to
 	// the database via JDBC
@@ -90,9 +98,53 @@ public class ProductServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		response.setContentType("text/html;charset=UTF-8");
+
+		int bookid = Integer.parseInt(request.getParameter("id"));
+		String book = request.getParameter("title");
+		String img = request.getParameter("img");
+		int paid = 0; // 0 = unpaid 1= paid
+		String price = request.getParameter("price");
+		String quantity = "1"; // request.getParameter("quantity");
+		String totalcost = "0";
+
+		String pattern = "dd/MM/yyyy HH:mm:ss";
+		DateFormat df = new SimpleDateFormat(pattern);
+		Date today = Calendar.getInstance().getTime();
+		String date = df.format(today);
+
+		HttpSession session = request.getSession();
+		var username = (String) session.getAttribute("Username");
+		System.out.println(username);
+		
+		try (Connection connection = getConnection();
+				// Step 2:Create a statement using connection object
+				PreparedStatement ps = connection.prepareStatement(INSERT_INTO_CART);) {
+			ps.setInt(1, bookid);
+			ps.setString(2, username);
+			ps.setString(3, book);
+			ps.setString(4, img);
+			ps.setInt(5, paid);
+			ps.setString(6, price);
+			ps.setString(7, quantity);
+			ps.setString(8, totalcost);
+			//ps.setString(10, date);
+
+			int i = ps.executeUpdate();
+			if (i > 0) {
+				PrintWriter writer = response.getWriter();
+				writer.println("<h1>" + "Added To Cart" + "</h1>");
+				writer.close();
+			}
+		}
+		// Step 8: catch and print out any exception
+		catch (Exception exception) {
+			System.out.println(exception);
+			System.out.close();
+		}
 		doGet(request, response);
 	}
+	
 
 	private void listProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
@@ -112,8 +164,10 @@ public class ProductServlet extends HttpServlet {
 				String description = rs.getString("description");
 				String genre = rs.getString("genre");
 				String image = rs.getString("image");
+				String price = rs.getString("price");
 
-				products.add(new Product(id, title, author, description, genre, image));
+
+				products.add(new Product(id, title, author, description, genre, image, price));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -132,7 +186,7 @@ public class ProductServlet extends HttpServlet {
 		// get parameter
 		int id = Integer.parseInt(request.getParameter("id"));
 
-		Product productDetail = new Product(id, "", "", "", "", "");
+		Product productDetail = new Product(id, "", "", "", "", "", "");
 
 		// Step 1: Establish a connection
 		try (Connection connection = getConnection();
@@ -148,7 +202,8 @@ public class ProductServlet extends HttpServlet {
 				String description = rs.getString("description");
 				String genre = rs.getString("genre");
 				String image = rs.getString("image");
-				productDetail = new Product(id, title, author, description, genre, image);
+				String price = rs.getString("price");
+				productDetail = new Product(id, title, author, description, genre, image, price);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -158,5 +213,8 @@ public class ProductServlet extends HttpServlet {
 		request.getRequestDispatcher("/productDetail.jsp").forward(request, response);
 		System.out.println(productDetail);
 	}
+	
+	
+	
 
 }

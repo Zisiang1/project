@@ -6,8 +6,9 @@ public class Product {
 	private String description;
 	private String genre;
 	private String image;
+	private String price;
 	
-	public Product(int id, String title, String author, String description, String genre, String image)
+	public Product(int id, String title, String author, String description, String genre, String image, String price)
 	{
 		super();
 		this.id = id;
@@ -16,6 +17,7 @@ public class Product {
 		this.description = description;
 		this.genre = genre;
 		this.image = image;
+		this.price = price;
 	}
 	
 	public int getId() {
@@ -54,5 +56,10 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
-
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
 }
