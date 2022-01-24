@@ -32,7 +32,7 @@ public class ProfileServlet extends HttpServlet {
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "password";
 	private static final String DELETE_USERS_SQL = "delete from customer where Name = ?;";
-	private static final String UPDATE_USERS_SQL = "update customer set Name = ?,Password= ?,Date_Of_Birth =?,Email =?,Phone_Number=?,Address,Address2,City,State,Zip where Name=?";
+	private static final String UPDATE_USERS_SQL = "update customer set Name = ?,Password= ?,Date_Of_Birth =?,Email =?,Phone_Number=?,Address=?,Address2=?,City=?,State=?,Zip=? where Name=?";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -134,6 +134,34 @@ public class ProfileServlet extends HttpServlet {
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
+		HttpSession session = request.getSession();
+		String user = (String) session.getAttribute("Username");
+		User existingUser = new User("", "", "", "","","","","","","");
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_NAME);) {
+			preparedStatement.setString(1, user);
+			ResultSet rs = preparedStatement.executeQuery();
+			System.out.println(rs);
+			while (rs.next()) {
+				user = rs.getString("Name");
+				String password = rs.getString("Password");
+				String dateofbirth = rs.getString("Date_Of_Birth");
+				String email = rs.getString("Email");
+				String phone = rs.getString("Phone_Number");
+				String address = rs.getString("Address");
+				String address2 = rs.getString("Address2");
+				String city = rs.getString("City");
+				String state = rs.getString("State");
+				String zip = rs.getString("Zip");
+				existingUser = new User(user, password, dateofbirth, email, phone, address, address2, city, state, zip);
+				System.out.println(existingUser.toString());
+				System.out.println(dateofbirth);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		request.setAttribute("user", existingUser);
+		request.getRequestDispatcher("/profileupdate.jsp").forward(request, response);
 		
 	}
 
@@ -170,22 +198,23 @@ public class ProfileServlet extends HttpServlet {
 		// Step 3: redirect back to UserServlet (note: remember to change the url to
 		// your project
 
-		response.sendRedirect("http://localhost:8090/HelloWorldJavaEE/UserServlet/dashboard");
+		response.sendRedirect("http://localhost:8090/GroupProject/ProfileServlet/profile");
 	}
 
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		// Step 1: Retrieve value from the request
-		String name = request.getParameter("Name");
+		HttpSession session = request.getSession();
+		String user = (String) session.getAttribute("Username");
 		// Step 2: Attempt connection with database and execute delete user SQL query
 		try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
-			statement.setString(1, name);
+			statement.setString(1, user);
 			int i = statement.executeUpdate();
 		}
 		// Step 3: redirect back to UserServlet dashboard (note: remember to change the
 		// url to
 
-		response.sendRedirect("http://localhost:8090/HelloWorldJavaEE/UserServlet/dashboard");
+		response.sendRedirect("http://localhost:8090/GroupProject/register.jsp");
 	}
 
 }

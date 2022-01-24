@@ -85,9 +85,10 @@ body {
                     <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" value="${user.city}" placeholder="country" value=""></div>
                     <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="${user.state}" value="" placeholder="state"></div>
                 </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                <div class="mt-5 text-center" ><a  href="<%=request.getContextPath()%>/ProfileServlet/edit"><button class="btn btn-primary profile-button" type="button">Update Profile</button></a></div>
+                 <div class="mt-5 text-center" ><a  href="<%=request.getContextPath()%>/ProfileServlet/delete"><button class="btn btn-primary profile-button" type="button">Delete Account</button></a></div>
             </div>
-        </div>
+        </div> 
      
     </div>
 </div>
