@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jan 17, 2022 at 04:31 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.33
+-- Host: 127.0.0.1
+-- Generation Time: Jan 24, 2022 at 02:50 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `bookstore`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(40) NOT NULL,
+  `bookid` int(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `book` varchar(255) NOT NULL,
+  `img` varchar(255) NOT NULL,
+  `paid` tinyint(1) NOT NULL,
+  `price` float NOT NULL,
+  `quantity` int(255) NOT NULL,
+  `totalcost` float NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `bookid`, `username`, `book`, `img`, `paid`, `price`, `quantity`, `totalcost`, `date`) VALUES
+(1, 0, '[value-3]', '[value-4]', '[value-5]', 0, 0, 0, 0, '0000-00-00 00:00:00'),
+(2, 0, '[value-3]', '[value-4]', '[value-5]', 0, 0, 0, 0, '0000-00-00 00:00:00'),
+(3, 2, 'tayyuda', 'Animals', '', 0, 0, 1, 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -59,19 +87,27 @@ CREATE TABLE `product` (
   `author` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `genre` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `title`, `author`, `description`, `genre`, `image`) VALUES
-(1, 'Book', 'Author', 'Synopsis', 'genre', 'image');
+INSERT INTO `product` (`id`, `title`, `author`, `description`, `genre`, `image`, `price`) VALUES
+(1, 'Book', 'Author', 'Synopsis', 'genre', 'image', 0),
+(2, 'Animals', 'Timothy', 'Book about animals', 'Kids', '', 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `customer`
@@ -90,10 +126,16 @@ ALTER TABLE `product`
 --
 
 --
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
