@@ -25,6 +25,7 @@
 		</ul>
 	</nav>
 
+	<!-- Add to cart form -->
 	<form  method="post">
 		<p>
 			Title:
@@ -44,7 +45,33 @@
 
 		<input type="submit" value="Add To Cart" />
 	</form>
+	
+<br><br>	
 
+<!-- Add review form-->
+	<form method="post">
+		<p>
+			Title:
+			<input readonly="readonly" value="${product.title}" name="title" />
+		</p>
+
+		<p>
+			Reviews:
+			<input name="reviews" />
+		</p>
+
+		<p>
+			Ratings:
+			<input name="ratings" />
+		</p>
+		
+
+		<input type="submit" value="Add Review" />
+	</form>
+	
+	<p> <c:out value="${review.book}" /></p>
+	<h1> <c:out value="${review.reviews}" /></h1>
+	<p> <c:out value="${review.book}" /></p>
 
 	<!-- <form>
 		<label for="quantity">Quantity:</label> 

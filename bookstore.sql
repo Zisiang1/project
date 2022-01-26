@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 24, 2022 at 02:50 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Host: localhost:3306
+-- Generation Time: Jan 26, 2022 at 03:58 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,7 +47,10 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`id`, `bookid`, `username`, `book`, `img`, `paid`, `price`, `quantity`, `totalcost`, `date`) VALUES
 (1, 0, '[value-3]', '[value-4]', '[value-5]', 0, 0, 0, 0, '0000-00-00 00:00:00'),
 (2, 0, '[value-3]', '[value-4]', '[value-5]', 0, 0, 0, 0, '0000-00-00 00:00:00'),
-(3, 2, 'tayyuda', 'Animals', '', 0, 0, 1, 0, '0000-00-00 00:00:00');
+(3, 2, 'tayyuda', 'Animals', '', 0, 0, 1, 0, '0000-00-00 00:00:00'),
+(6, 1, 'tayyuda', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 09:58:11'),
+(7, 1, 'tayyuda', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 11:04:37'),
+(8, 1, 'test', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 13:02:11');
 
 -- --------------------------------------------------------
 
@@ -73,7 +76,8 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`Name`, `Password`, `Date_Of_Birth`, `Email`, `Phone_Number`, `Address`, `Address2`, `City`, `State`, `Zip`) VALUES
-('tayyuda', '123', '2022-01-21', 'tayyuda@gmail.com', 123123, '11 Pasir Ris Street 11 07-647, Singapore Singapore 510112, SGP', '312', 'Singapore', 'daasdd', 513123);
+('tayyuda', '123', '2022-01-21', 'tayyuda@gmail.com', 123123, '11 Pasir Ris Street 11 07-647, Singapore Singapore 510112, SGP', '312', 'Singapore', 'daasdd', 513123),
+('test', '123', '2022-02-04', 'test1@gmail.com', 123213, 'test', 'test', 'test', 'test', 12);
 
 -- --------------------------------------------------------
 
@@ -99,6 +103,30 @@ INSERT INTO `product` (`id`, `title`, `author`, `description`, `genre`, `image`,
 (1, 'Book', 'Author', 'Synopsis', 'genre', 'image', 0),
 (2, 'Animals', 'Timothy', 'Book about animals', 'Kids', '', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `id` int(255) NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reviews` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ratings` int(255) NOT NULL,
+  `book` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bookid` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`id`, `username`, `reviews`, `ratings`, `book`, `bookid`) VALUES
+(1, 'tayyuda', 'great book', 3, 'book', 1),
+(2, 'test', '3', 3, 'Book', 1),
+(3, 'tayyuda', '2', 2, 'Animals', 2);
+
 --
 -- Indexes for dumped tables
 --
@@ -122,6 +150,12 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -129,13 +163,19 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
