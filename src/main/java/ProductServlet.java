@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -36,10 +37,11 @@ public class ProductServlet extends HttpServlet {
 
 	// Step 2: Prepare list of SQL prepared statements to perform CRUD to our
 	// database
+	private static final String SELECT_REVIEW_BY_BOOK = "select * from review where book = ?";
+	private static final String INSERT_REVIEW_BY_BOOK = "insert into review(username, reviews, ratings, book, bookid) values(?,?,?,?,?)";
 	private static final String SELECT_ALL_PRODUCTS = "select * from product";
 	private static final String SELECT_PRODUCT_BY_ID = "select * from product where id = ?";
 	private static final String INSERT_INTO_CART = "insert into cart (bookid, username, book, img, paid, price, quantity, totalcost ) values(?,?,?,?,?,?,?,?)";
-
 
 	// Step 3: Implement the getConnection method which facilitates connection to
 	// the database via JDBC
@@ -83,8 +85,8 @@ public class ProductServlet extends HttpServlet {
 				productDetailsPage(request, response);
 				break;
 			case "/ProductServlet/home":
-				 listProduct(request, response);
-				 break;
+				listProduct(request, response);
+				break;
 
 			}
 		} catch (SQLException ex) {
@@ -116,7 +118,10 @@ public class ProductServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		var username = (String) session.getAttribute("Username");
 		System.out.println(username);
-		
+
+		String reviews = request.getParameter("reviews");
+		String ratings = request.getParameter("ratings");
+
 		try (Connection connection = getConnection();
 				// Step 2:Create a statement using connection object
 				PreparedStatement ps = connection.prepareStatement(INSERT_INTO_CART);) {
@@ -128,7 +133,7 @@ public class ProductServlet extends HttpServlet {
 			ps.setString(6, price);
 			ps.setString(7, quantity);
 			ps.setString(8, totalcost);
-			//ps.setString(10, date);
+			// ps.setString(10, date);
 
 			int i = ps.executeUpdate();
 			if (i > 0) {
@@ -142,9 +147,30 @@ public class ProductServlet extends HttpServlet {
 			System.out.println(exception);
 			System.out.close();
 		}
+		try (Connection connection = getConnection();
+				// Step 2:Create a statement using connection object
+				PreparedStatement ps = connection.prepareStatement(INSERT_REVIEW_BY_BOOK);) {
+
+			ps.setString(1, username);
+			ps.setString(2, reviews);
+			ps.setString(3, ratings);
+			ps.setString(4, book);
+			ps.setInt(5, bookid);
+
+			int i = ps.executeUpdate();
+			if (i > 0) {
+				PrintWriter writer = response.getWriter();
+				writer.println("<h1>" + "Reviews added" + "</h1>");
+				writer.close();
+			}
+		}
+		// Step 8: catch and print out any exception
+		catch (Exception exception) {
+			System.out.println(exception);
+			System.out.close();
+		}
 		doGet(request, response);
 	}
-	
 
 	private void listProduct(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
@@ -166,7 +192,6 @@ public class ProductServlet extends HttpServlet {
 				String image = rs.getString("image");
 				String price = rs.getString("price");
 
-
 				products.add(new Product(id, title, author, description, genre, image, price));
 			}
 		} catch (SQLException e) {
@@ -185,8 +210,12 @@ public class ProductServlet extends HttpServlet {
 
 		// get parameter
 		int id = Integer.parseInt(request.getParameter("id"));
+		int bookid = Integer.parseInt(request.getParameter("id"));
 
 		Product productDetail = new Product(id, "", "", "", "", "", "");
+		Review reviewDetail = new Review(id, "", "", "", "", bookid);
+
+//		List<Review> reviews = new ArrayList<>();
 
 		// Step 1: Establish a connection
 		try (Connection connection = getConnection();
@@ -205,16 +234,66 @@ public class ProductServlet extends HttpServlet {
 				String price = rs.getString("price");
 				productDetail = new Product(id, title, author, description, genre, image, price);
 			}
-		} catch (SQLException e) {
+		}
+		// Select reviews
+		try (Connection connection2 = getConnection();
+				PreparedStatement preparedStatement2 = connection2.prepareStatement(SELECT_REVIEW_BY_BOOK);) {
+			preparedStatement2.setLong(1, bookid);
+			// Step 3: Execute the query or update query
+			ResultSet rs2 = preparedStatement2.executeQuery();
+			// Step 4: Process the ResultSet object
+			while (rs2.next()) {
+				id = Integer.parseInt(rs2.getString("id"));
+				String username = rs2.getString("username");
+				String book = rs2.getString("title");
+				String reviews = rs2.getString("reviews");
+				String ratings = rs2.getString("ratings");
+				// bookid = Integer.parseInt(rs.getString("bookid"));
+				bookid = rs2.getInt("bookid");
+
+				reviewDetail = new Review(id, username, reviews, ratings, book, bookid);
+			}
+		}
+
+		catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		// Step 5: Set existingUser to request and serve up the userEdit form
 		request.setAttribute("product", productDetail);
+		request.setAttribute("review", reviewDetail);
 		request.getRequestDispatcher("/productDetail.jsp").forward(request, response);
 		System.out.println(productDetail);
+		// System.out.println(reviewDetail);
 	}
-	
-	
-	
+
+//	private void listReview(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException, ServletException {
+//
+//		List<Review> reviews = new ArrayList<>();
+//
+//		try (Connection connection = getConnection();
+//				// Step 5.1: Create a statement using connection object
+//				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_REVIEW_BY_BOOK);) {
+//			// Step 5.2: Execute the query or update query
+//			ResultSet rs = preparedStatement.executeQuery();
+//			// Step 5.3: Process the ResultSet object.
+//			while (rs.next()) {
+//				int id = rs.getInt("id");
+//				String username = rs.getString("username");
+//				String book = rs.getString("title");
+//				String review = rs.getString("reviews");
+//				String ratings = rs.getString("ratings");
+//				int bookid = rs.getInt("bookid");
+//
+//				reviews.add(new Review(username, review, ratings, book, bookid));
+//			}
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		// Step 5.4: Set the users list into the listProduct attribute to be pass to the
+//		// product.jsp
+//		request.setAttribute("review", reviews);
+//		request.getRequestDispatcher("/productDetail.jsp").forward(request, response);
+//	}
 
 }
