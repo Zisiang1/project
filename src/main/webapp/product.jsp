@@ -51,6 +51,11 @@
   </div>
 </nav>
 
+<br>
+<h4>Switch Between Product and Review View</h4>
+<td><a href="home">Check Products</a></td><br>
+<td><a href="reviews">Check Reviews</a></td><br><br>
+
 
 	<div class="row">
 		<div class="container">
@@ -91,6 +96,54 @@
 							<td><c:out value="${product.price}" /></td>							
 							<td><a href="productDetail?id=<c:out value="${product.id}" />">To product detail</a></td>
 							<td><a href="">Add to Favorite</a></td>
+							<!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
+							<!-- <td><a href="edit?name=<c:out value='${user.name}' />">Edit</a>
+								&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="delete?name=<c:out value='${user.name}' />">Delete</a></td>  -->
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+		<div class="row">
+		<div class="container">
+			<h3 class="text-center">List of Reviews</h3>
+			<hr>
+			<div class="container text-left">
+				<!-- Add new user button redirects to the register.jsp page -->
+				<!-- <a href="<%=request.getContextPath()%>/register.jsp"
+					class="btn btn-success">Add New User</a>  -->
+			</div>
+			<br>
+			<!-- Create a table to list out all current users information -->
+			<table class="table">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>username</th>
+						<th>reviews</th>
+						<th>ratings</th>
+						<th>book</th>
+						<th>bookid</th>
+						<th>Update</th>
+						<th>Placeholder</th>
+					</tr>
+				</thead>
+				<!-- Pass in the list of users receive via the Servlet’s response to a loop -->
+				<tbody>
+					<c:forEach var="review" items="${listReview}">
+						<!-- For each user in the database, display their information accordingly -->
+						<tr>
+							<td><c:out value="${review.id}" /></td>
+							<td><c:out value="${review.username}" /></td>
+							<td><c:out value="${review.reviews}" /></td>
+							<td><c:out value="${review.ratings}" /></td>
+							<td><c:out value="${review.book}" /></td>
+							<td><c:out value="${review.bookid}" /></td>
+							<td><a href="editReview?id=<c:out value="${review.id}" />">Update</a></td>
+							<td><a  href="<%=request.getContextPath()%>/ProductServlet/deleteReview?id=<c:out value="${review.id }" />"><button class="btn btn-primary profile-button" type="button">Delete Review</button></a></td>
 							<!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
 							<!-- <td><a href="edit?name=<c:out value='${user.name}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a
