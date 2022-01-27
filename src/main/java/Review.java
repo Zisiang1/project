@@ -2,18 +2,18 @@ public class Review {
 
 	private int id;
 	private String username;
-	private String book;
 	private String reviews;
 	private String ratings;
-	private int bookid;
+	private String book;
+	private String bookid;
 
-	public Review(int id, String username, String book, String reviews, String ratings, int bookid) {
+	public Review(int id, String username, String reviews, String ratings, String book, String bookid) {
 		// TODO Auto-generated constructor stub
 		this.id = id;
 		this.username = username;
-		this.book = book;
 		this.reviews = reviews;
 		this.ratings = ratings;
+		this.book = book;
 		this.bookid = bookid;
 	}
 
@@ -33,14 +33,6 @@ public class Review {
 		this.username = username;
 	}
 
-	public String getBook() {
-		return book;
-	}
-
-	public void setBook(String book) {
-		this.book = book;
-	}
-
 	public String getReviews() {
 		return reviews;
 	}
@@ -56,12 +48,20 @@ public class Review {
 	public void setRatings(String ratings) {
 		this.ratings = ratings;
 	}
+	
+	public String getBook() {
+		return book;
+	}
 
-	public int getBookid() {
+	public void setBook(String book) {
+		this.book = book;
+	}
+
+	public String getBookid() {
 		return bookid;
 	}
 
-	public void setBookid(int bookid) {
+	public void setBookid(String bookid) {
 		this.bookid = bookid;
 	}
 

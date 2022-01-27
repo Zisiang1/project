@@ -32,7 +32,12 @@
 	<servlet-mapping>
 		<servlet-name>ProductServlet</servlet-name>
 		<url-pattern>/ProductServlet/home</url-pattern>
+		<url-pattern>/ProductServlet/reviews</url-pattern>
 		<url-pattern>/ProductServlet/productDetail</url-pattern>
+		<url-pattern>/ProductServlet/editReview</url-pattern>
+		<url-pattern>/ProductServlet/update</url-pattern>
+		<url-pattern>/ProductServlet/deleteReview</url-pattern>
 	</servlet-mapping>
+	
 
 </web-app>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 26, 2022 at 03:58 PM
+-- Generation Time: Jan 27, 2022 at 03:37 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.33
 
@@ -50,7 +50,9 @@ INSERT INTO `cart` (`id`, `bookid`, `username`, `book`, `img`, `paid`, `price`, 
 (3, 2, 'tayyuda', 'Animals', '', 0, 0, 1, 0, '0000-00-00 00:00:00'),
 (6, 1, 'tayyuda', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 09:58:11'),
 (7, 1, 'tayyuda', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 11:04:37'),
-(8, 1, 'test', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 13:02:11');
+(8, 1, 'test', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 13:02:11'),
+(9, 1, 'test', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 15:00:30'),
+(10, 1, 'test', 'Book', 'image', 0, 0, 1, 0, '2022-01-27 13:35:19');
 
 -- --------------------------------------------------------
 
@@ -124,8 +126,9 @@ CREATE TABLE `review` (
 
 INSERT INTO `review` (`id`, `username`, `reviews`, `ratings`, `book`, `bookid`) VALUES
 (1, 'tayyuda', 'great book', 3, 'book', 1),
-(2, 'test', '3', 3, 'Book', 1),
-(3, 'tayyuda', '2', 2, 'Animals', 2);
+(2, 'test', 'Great read had a blast', 3, 'Book', 1),
+(3, 'tayyuda', 'Aight', 2, 'Animals', 2),
+(4, 'test', 'Great book!!', 4, 'Animals', 2);
 
 --
 -- Indexes for dumped tables
@@ -163,7 +166,7 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -175,7 +178,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

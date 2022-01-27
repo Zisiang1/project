@@ -69,6 +69,7 @@
 		<input type="submit" value="Add Review" />
 	</form>
 	
+	<p> <c:out value="${product.title}" /></p>
 	<p> <c:out value="${review.book}" /></p>
 	<h1> <c:out value="${review.reviews}" /></h1>
 	<p> <c:out value="${review.book}" /></p>
