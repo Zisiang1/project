@@ -20,6 +20,10 @@
 		<servlet-name>ProductServlet</servlet-name>
 		<servlet-class>ProductServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>FavouriteServlet</servlet-name>
+		<servlet-class>FavouriteServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>ProfileServlet</servlet-name>
@@ -39,5 +43,10 @@
 		<url-pattern>/ProductServlet/deleteReview</url-pattern>
 	</servlet-mapping>
 	
-
+	<servlet-mapping>
+		<servlet-name>FavouriteServlet</servlet-name>
+		<url-pattern>/FavouriteServlet</url-pattern>
+		<url-pattern>/FavouriteServlet/dashboard</url-pattern>
+		<url-pattern>/FavouriteServlet/delete</url-pattern>
+	</servlet-mapping>
 </web-app>
