@@ -66,10 +66,6 @@ public class FavouriteServlet extends HttpServlet {
 			case "/FavouriteServlet/delete":
 				deleteFavourites(request,response);
 				break;
-			case "/FavouriteServlet/edit":
-				break;
-			case "/FavouriteServlet/update":
-				break;
 			case "/FavouriteServlet/dashboard":
 				listFavourites(request, response);
 				break;
