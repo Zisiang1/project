@@ -2,10 +2,11 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 31, 2022 at 04:17 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+
+-- Host: localhost:3306
+-- Generation Time: Jan 27, 2022 at 03:37 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -72,12 +73,12 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`id`, `bookid`, `username`, `book`, `img`, `paid`, `price`, `quantity`, `totalcost`, `date`) VALUES
 (1, 0, '[value-3]', '[value-4]', '[value-5]', 0, 0, 0, 0, '0000-00-00 00:00:00'),
 (2, 0, '[value-3]', '[value-4]', '[value-5]', 0, 0, 0, 0, '0000-00-00 00:00:00'),
-(3, 2, 'tayyuda', 'Animals', '', 1, 0, 1, 0, '2022-01-31 02:33:03'),
-(6, 1, 'tayyuda', 'Book', 'image', 1, 0, 1, 0, '2022-01-31 02:33:03'),
-(7, 1, 'tayyuda', 'Book', 'image', 1, 0, 1, 0, '2022-01-31 02:33:03'),
+(3, 2, 'tayyuda', 'Animals', '', 0, 0, 1, 0, '0000-00-00 00:00:00'),
+(6, 1, 'tayyuda', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 09:58:11'),
+(7, 1, 'tayyuda', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 11:04:37'),
 (8, 1, 'test', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 13:02:11'),
-(9, 2, 'tayyuda', 'Animals', '', 1, 0, 1, 0, '2022-01-31 03:07:34'),
-(10, 1, 'tayyuda', 'Book', 'image', 1, 0, 1, 0, '2022-01-31 03:07:34');
+(9, 1, 'test', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 15:00:30'),
+(10, 1, 'test', 'Book', 'image', 0, 0, 1, 0, '2022-01-27 13:35:19');
 
 -- --------------------------------------------------------
 
@@ -151,9 +152,9 @@ CREATE TABLE `review` (
 
 INSERT INTO `review` (`id`, `username`, `reviews`, `ratings`, `book`, `bookid`) VALUES
 (1, 'tayyuda', 'great book', 3, 'book', 1),
-(2, 'test', '3', 3, 'Book', 1),
-(3, 'tayyuda', '2', 2, 'Animals', 2),
-(4, 'tayyuda', 'Nice', 5, 'Book', 1);
+(2, 'test', 'Great read had a blast', 3, 'Book', 1),
+(3, 'tayyuda', 'Aight', 2, 'Animals', 2),
+(4, 'test', 'Great book!!', 4, 'Animals', 2);
 
 --
 -- Indexes for dumped tables
@@ -203,7 +204,7 @@ ALTER TABLE `booking`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -215,7 +216,8 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

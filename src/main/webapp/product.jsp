@@ -14,7 +14,6 @@
 
 <body>
 
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,14 +54,12 @@
 </nav>
 
 
+
 	<div class="row">
 		<div class="container">
 			<h3 class="text-center">List of Products</h3>
 			<hr>
 			<div class="container text-left">
-				<!-- Add new user button redirects to the register.jsp page -->
-				<!-- <a href="<%=request.getContextPath()%>/register.jsp"
-					class="btn btn-success">Add New User</a>  -->
 			</div>
 			<br>
 			<!-- Create a table to list out all current users information -->
@@ -77,7 +74,7 @@
 						<th>image</th>
 						<th>price</th>			
 						<th>link</th>
-						<th>Add to Favorite</th>
+						<th>link</th>
 					</tr>
 				</thead>
 				<!-- Pass in the list of users receive via the Servlet’s response to a loop -->
@@ -93,16 +90,13 @@
 							<td><c:out value="${product.image}" /></td>
 							<td><c:out value="${product.price}" /></td>							
 							<td><a href="productDetail?id=<c:out value="${product.id}" />">To product detail</a></td>
-							<td><a href="">Add to Favorite</a></td>
-							<!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
-							<!-- <td><a href="edit?name=<c:out value='${user.name}' />">Edit</a>
-								&nbsp;&nbsp;&nbsp;&nbsp; <a
-								href="delete?name=<c:out value='${user.name}' />">Delete</a></td>  -->
+							<td><a href="addFavourite?id=<c:out value="${product.id}"/>">Add to Favourites</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
+	
 </body>
 </html>
