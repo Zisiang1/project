@@ -29,6 +29,9 @@
       <li class="nav-item">
         <a class="nav-link" href="<%=request.getContextPath()%>/ProfileServlet/profile">Profile</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%=request.getContextPath()%>/CartServlet/cart">Cart</a>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown

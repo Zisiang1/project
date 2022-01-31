@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jan 26, 2022 at 03:58 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.33
+-- Host: 127.0.0.1
+-- Generation Time: Jan 31, 2022 at 04:17 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `bookstore`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking`
+--
+
+CREATE TABLE `booking` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `book` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`id`, `username`, `book`, `quantity`, `price`) VALUES
+(1, 'tayyuda', 'Animals', 1, 0),
+(2, 'tayyuda', 'Book', 1, 0),
+(3, 'tayyuda', 'Book', 1, 0),
+(4, 'tayyuda', 'Animals', 1, 0),
+(5, 'tayyuda', 'Book', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -47,10 +72,12 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`id`, `bookid`, `username`, `book`, `img`, `paid`, `price`, `quantity`, `totalcost`, `date`) VALUES
 (1, 0, '[value-3]', '[value-4]', '[value-5]', 0, 0, 0, 0, '0000-00-00 00:00:00'),
 (2, 0, '[value-3]', '[value-4]', '[value-5]', 0, 0, 0, 0, '0000-00-00 00:00:00'),
-(3, 2, 'tayyuda', 'Animals', '', 0, 0, 1, 0, '0000-00-00 00:00:00'),
-(6, 1, 'tayyuda', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 09:58:11'),
-(7, 1, 'tayyuda', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 11:04:37'),
-(8, 1, 'test', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 13:02:11');
+(3, 2, 'tayyuda', 'Animals', '', 1, 0, 1, 0, '2022-01-31 02:33:03'),
+(6, 1, 'tayyuda', 'Book', 'image', 1, 0, 1, 0, '2022-01-31 02:33:03'),
+(7, 1, 'tayyuda', 'Book', 'image', 1, 0, 1, 0, '2022-01-31 02:33:03'),
+(8, 1, 'test', 'Book', 'image', 0, 0, 1, 0, '2022-01-26 13:02:11'),
+(9, 2, 'tayyuda', 'Animals', '', 1, 0, 1, 0, '2022-01-31 03:07:34'),
+(10, 1, 'tayyuda', 'Book', 'image', 1, 0, 1, 0, '2022-01-31 03:07:34');
 
 -- --------------------------------------------------------
 
@@ -125,11 +152,18 @@ CREATE TABLE `review` (
 INSERT INTO `review` (`id`, `username`, `reviews`, `ratings`, `book`, `bookid`) VALUES
 (1, 'tayyuda', 'great book', 3, 'book', 1),
 (2, 'test', '3', 3, 'Book', 1),
-(3, 'tayyuda', '2', 2, 'Animals', 2);
+(3, 'tayyuda', '2', 2, 'Animals', 2),
+(4, 'tayyuda', 'Nice', 5, 'Book', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `cart`
@@ -160,10 +194,16 @@ ALTER TABLE `review`
 --
 
 --
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -175,7 +215,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
