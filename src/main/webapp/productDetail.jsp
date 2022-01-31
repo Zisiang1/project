@@ -24,6 +24,7 @@
 		</ul>
 	</nav>
 
+
 <div class="container col-md-6">
 	<div class="card">
 		<div class="card-body">
@@ -45,6 +46,9 @@
 					<input readonly="readonly" value="${product.price}" name="price" class="form-control" />
 				</p>
 		
+        <label for="quantity">Quantity:</label> <input type="number"
+			    id="quantity" name="quantity" min="1" max="10"> <input
+			    type="submit" value="Add To Cart" />
 		
 				<input type="submit" value="Add To Cart" class="btn btn-success" />
 			</form>

@@ -1,6 +1,15 @@
 
 public class Cart {
 	
+	@Override
+	public String toString() {
+		return "Cart [id=" + id + ", bookid=" + bookid + ", username=" + username + ", book=" + book + ", img=" + img
+				+ ", paid=" + paid + ", price=" + price + ", quantity=" + quantity + ", totalcost=" + totalcost
+				+ ", date=" + date + "]";
+	}
+
+
+	private int id;
 	private int bookid;
 	private String username;
 	private String book;
@@ -12,11 +21,32 @@ public class Cart {
 	private String date;
 	
 	
-	public Cart(int bookid, String username, String book, String img, String paid, String price,
+
+
+	public Cart(int id, int bookid, String username, String book, String img, String paid, String price,
 			String quantity, String totalcost, String date) {
-		// TODO Auto-generated constructor stub
+		super();
+		this.id = id;
+		this.bookid = bookid;
+		this.username = username;
+		this.book = book;
+		this.img = img;
+		this.paid = paid;
+		this.price = price;
+		this.quantity = quantity;
+		this.totalcost = totalcost;
+		this.date = date;
 	}
 
+
+	public int getid() {
+		return id;
+	}
+
+
+	public void setid(int id) {
+		this.id = id;
+	}
 
 	public int getBookid() {
 		return bookid;

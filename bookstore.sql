@@ -1,7 +1,8 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
+
 -- Host: localhost:3306
 -- Generation Time: Jan 27, 2022 at 03:37 PM
 -- Server version: 10.4.14-MariaDB
@@ -20,6 +21,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `bookstore`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking`
+--
+
+CREATE TABLE `booking` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `book` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`id`, `username`, `book`, `quantity`, `price`) VALUES
+(1, 'tayyuda', 'Animals', 1, 0),
+(2, 'tayyuda', 'Book', 1, 0),
+(3, 'tayyuda', 'Book', 1, 0),
+(4, 'tayyuda', 'Animals', 1, 0),
+(5, 'tayyuda', 'Book', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -135,6 +161,12 @@ INSERT INTO `review` (`id`, `username`, `reviews`, `ratings`, `book`, `bookid`) 
 --
 
 --
+-- Indexes for table `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
@@ -163,6 +195,12 @@ ALTER TABLE `review`
 --
 
 --
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
@@ -178,6 +216,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
+
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 

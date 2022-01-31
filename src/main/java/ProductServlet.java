@@ -126,7 +126,7 @@ public class ProductServlet extends HttpServlet {
 		String img = request.getParameter("img");
 		int paid = 0; // 0 = unpaid 1= paid
 		String price = request.getParameter("price");
-		String quantity = "1"; // request.getParameter("quantity");
+		String quantity = request.getParameter("quantity");
 		String totalcost = "0";
 
 		String pattern = "dd/MM/yyyy HH:mm:ss";
@@ -240,7 +240,7 @@ public class ProductServlet extends HttpServlet {
 				String image = rs.getString("image");
 				String price = rs.getString("price");
 
-				products.add(new Product(id, title, author, description, genre, image, price));
+				products.add(new Product(id, title, author, description, genre, image, price));				
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
