@@ -37,7 +37,7 @@ public class ProductServlet extends HttpServlet {
 
 	// Step 2: Prepare list of SQL prepared statements to perform CRUD to our
 	// database
-	private static final String SELECT_ALL_REVIEW = "select * from review";
+	private static final String SELECT_ALL_REVIEW_BY_NAME = "select * from review where username=?";
 	private static final String SELECT_REVIEW_BY_ID = "select * from review where id = ?";
 	private static final String INSERT_REVIEW_BY_BOOK = "insert into review(username, reviews, ratings, book, bookid) values(?,?,?,?,?)";
 	private static final String UPDATE_REVIEW_BY_ID = "update review set id=?,username=?,reviews=?,ratings=?,book=?,bookid=? where id=?";
@@ -258,15 +258,19 @@ public class ProductServlet extends HttpServlet {
 
 		List<Review> reviews = new ArrayList<>();
 
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("Username");
+		
 		try (Connection connection = getConnection();
 				// Step 5.1: Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_REVIEW);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_REVIEW_BY_NAME);) {
+			preparedStatement.setString(1, username);
 			// Step 5.2: Execute the query or update query
 			ResultSet rs = preparedStatement.executeQuery();
 			// Step 5.3: Process the ResultSet object.
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				String username = rs.getString("username");
+				username = rs.getString("username");
 				String review = rs.getString("reviews");
 				String ratings = rs.getString("ratings");
 				String book = rs.getString("book");
