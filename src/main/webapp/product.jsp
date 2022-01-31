@@ -24,25 +24,19 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/ProductServlet/home">Home<span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item"><a class="nav-link"
+					href="<%=request.getContextPath()%>/ProductServlet/reviews">Reviews</a>
+				</li>
       <li class="nav-item">
         <a class="nav-link" href="<%=request.getContextPath()%>/ProfileServlet/profile">Profile</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+      <!-- Add To Favourite -->
+       <li class="nav-item">
+        <a class="nav-link" href="<%=request.getContextPath()%>/FavouriteServlet/dashboard">Library</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
+      
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -50,12 +44,6 @@
     </form>
   </div>
 </nav>
-
-<br>
-<h4>Switch Between Product and Review View</h4>
-<td><a href="home">Check Products</a></td><br>
-<td><a href="reviews">Check Reviews</a></td><br><br>
-
 
 	<div class="row">
 		<div class="container">
@@ -79,7 +67,6 @@
 						<th>image</th>
 						<th>price</th>			
 						<th>link</th>
-						<th>Add to Favorite</th>
 					</tr>
 				</thead>
 				<!-- Pass in the list of users receive via the Servlet’s response to a loop -->
@@ -95,7 +82,6 @@
 							<td><c:out value="${product.image}" /></td>
 							<td><c:out value="${product.price}" /></td>							
 							<td><a href="productDetail?id=<c:out value="${product.id}" />">To product detail</a></td>
-							<td><a href="">Add to Favorite</a></td>
 							<!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
 							<!-- <td><a href="edit?name=<c:out value='${user.name}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a
@@ -107,52 +93,5 @@
 		</div>
 	</div>
 	
-		<div class="row">
-		<div class="container">
-			<h3 class="text-center">List of Reviews</h3>
-			<hr>
-			<div class="container text-left">
-				<!-- Add new user button redirects to the register.jsp page -->
-				<!-- <a href="<%=request.getContextPath()%>/register.jsp"
-					class="btn btn-success">Add New User</a>  -->
-			</div>
-			<br>
-			<!-- Create a table to list out all current users information -->
-			<table class="table">
-				<thead>
-					<tr>
-						<th>id</th>
-						<th>username</th>
-						<th>reviews</th>
-						<th>ratings</th>
-						<th>book</th>
-						<th>bookid</th>
-						<th>Update</th>
-						<th>Placeholder</th>
-					</tr>
-				</thead>
-				<!-- Pass in the list of users receive via the Servlet’s response to a loop -->
-				<tbody>
-					<c:forEach var="review" items="${listReview}">
-						<!-- For each user in the database, display their information accordingly -->
-						<tr>
-							<td><c:out value="${review.id}" /></td>
-							<td><c:out value="${review.username}" /></td>
-							<td><c:out value="${review.reviews}" /></td>
-							<td><c:out value="${review.ratings}" /></td>
-							<td><c:out value="${review.book}" /></td>
-							<td><c:out value="${review.bookid}" /></td>
-							<td><a href="editReview?id=<c:out value="${review.id}" />">Update</a></td>
-							<td><a  href="<%=request.getContextPath()%>/ProductServlet/deleteReview?id=<c:out value="${review.id }" />"><button class="btn btn-primary profile-button" type="button">Delete Review</button></a></td>
-							<!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
-							<!-- <td><a href="edit?name=<c:out value='${user.name}' />">Edit</a>
-								&nbsp;&nbsp;&nbsp;&nbsp; <a
-								href="delete?name=<c:out value='${user.name}' />">Delete</a></td>  -->
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-	</div>
 </body>
 </html>

@@ -247,7 +247,7 @@ public class ProductServlet extends HttpServlet {
 		// Step 5.4: Set the users list into the listProduct attribute to be pass to the
 		// product.jsp
 		request.setAttribute("listReview", reviews);
-		request.getRequestDispatcher("/product.jsp").forward(request, response);
+		request.getRequestDispatcher("/reviews.jsp").forward(request, response);
 		return;
 	}
 
