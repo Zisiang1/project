@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="#">Navbar</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -33,15 +33,10 @@
 					href="<%=request.getContextPath()%>/ProductServlet/reviews">Reviews</a>
 				</li>
 				<li class="nav-item"><a class="nav-link"
-					href="<%=request.getContextPath()%>/FavouriteServlet/dashboard">Favourites</a>
-				</li>
-				<li class="nav-item"><a class="nav-link"
 					href="<%=request.getContextPath()%>/ProfileServlet/profile">Profile</a>
 				</li>
-
 				<li class="nav-item"><a class="nav-link"
-					href="<%=request.getContextPath()%>/CartServlet/cart">Cart</a>
-				</li>
+					href="<%=request.getContextPath()%>/CartServlet/cart">Cart</a></li>
 
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
@@ -91,18 +86,19 @@
 							<td><c:out value="${cart.totalcost}" /></td>
 							<td><c:out value="${carts.date}" /></td>
 							<!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
-							<td><a href="<%=request.getContextPath()%>/CartServlet/delete?id=<c:out value='${cart.id}' />">Delete</a></td>
+							<td><a
+								href="<%=request.getContextPath()%>/CartServlet/delete?id=<c:out value='${cart.id}' />">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
+	<div class="container text-right">
+		<a href="<%=request.getContextPath()%>/CartServlet/pay"
+			class="btn btn-success">Pay</a>
 
-	<a href="<%=request.getContextPath()%>/CartServlet/pay"
-		class="btn btn-success">Pay</a>
-
-
+	</div>
 
 
 </body>

@@ -35,7 +35,6 @@
 				<li class="nav-item"><a class="nav-link"
 					href="<%=request.getContextPath()%>/ProfileServlet/profile">Profile</a>
 				</li>
-
 				<li class="nav-item"><a class="nav-link"
 					href="<%=request.getContextPath()%>/CartServlet/cart">Cart</a>
 				</li>
