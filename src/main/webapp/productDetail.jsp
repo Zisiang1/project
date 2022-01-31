@@ -47,8 +47,7 @@
 				</p>
 		
         <label for="quantity">Quantity:</label> <input type="number"
-			    id="quantity" name="quantity" min="1" max="10"> <input
-			    type="submit" value="Add To Cart" />
+			    id="quantity" name="quantity" min="1" max="10">
 		
 				<input type="submit" value="Add To Cart" class="btn btn-success" />
 			</form>
@@ -91,10 +90,5 @@
 	<h1> <c:out value="${review.reviews}" /></h1>
 	<p> <c:out value="${review.book}" /></p>
 
-	<!-- <form>
-		<label for="quantity">Quantity:</label> 
-		<input type="number" id="quantity" name="quantity" min="1" max="10">
-		<input type="submit">
-	</form> -->
 </body>
 </html>
