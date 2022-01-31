@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import project.User;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -43,7 +45,8 @@ public class ProductServlet extends HttpServlet {
 	private static final String SELECT_ALL_PRODUCTS = "select * from product";
 	private static final String SELECT_PRODUCT_BY_ID = "select * from product where id = ?";
 	private static final String INSERT_INTO_CART = "insert into cart (bookid, username, book, img, paid, price, quantity, totalcost ) values(?,?,?,?,?,?,?,?)";
-
+	private static final String SELECT_USER_BY_NAME = "select Name,Password,Date_Of_Birth,Email,Phone_Number,Address,Address2,City,State,Zip from customer where Name =?";
+	
 	// Step 3: Implement the getConnection method which facilitates connection to
 	// the database via JDBC
 	protected Connection getConnection() {
@@ -99,6 +102,9 @@ public class ProductServlet extends HttpServlet {
 				break;
 			case "/ProductServlet/deleteReview":
 				deleteReview(request, response);
+				break;
+			case "/ProductServlet/addFavourite":
+				addNewFavourite(request,response);
 				break;
 			}
 		} catch (SQLException ex) {
@@ -184,6 +190,33 @@ public class ProductServlet extends HttpServlet {
 			System.out.println(exception);
 			System.out.close();
 		}
+		
+		//Favourite
+		response.setContentType("text/html");
+
+		PrintWriter out = response.getWriter();
+		String title = request.getParameter("title");
+		String author = request.getParameter("author");
+		String name = request.getParameter("name");
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "password");
+			PreparedStatement ps = con.prepareStatement("insert into FAVOURITES values(?,?,?)");
+			ps.setString(1, title);
+			ps.setString(2, author);
+			ps.setString(3, name);
+			int i = ps.executeUpdate();
+			if (i > 0) {
+				PrintWriter writer = response.getWriter();
+				writer.println("<h1> Favourites added </h1> <br> <a href = 'home'><button>Continue</button></a>");
+				writer.close();
+			}
+		} catch (Exception exception) {
+			System.out.println(exception);
+			out.close();
+		}
+
 		doGet(request, response);
 	}
 
@@ -380,19 +413,77 @@ public class ProductServlet extends HttpServlet {
 		response.sendRedirect("http://localhost:8090/GroupProject/ProductServlet/reviews");
 	}
 
-	//method to delete reviews
-	private void deleteReview(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException
-	{
-		//Step 1: Retrieve ID
+	// method to delete reviews
+	private void deleteReview(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		// Step 1: Retrieve ID
 		int id = Integer.parseInt(request.getParameter("id"));
-		
-		//Step 2: Attempt connection with database and execute delete review sql query
+
+		// Step 2: Attempt connection with database and execute delete review sql query
 		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(DELETE_REVIEW_BY_ID);)
-		{
+				PreparedStatement statement = connection.prepareStatement(DELETE_REVIEW_BY_ID);) {
 			statement.setInt(1, id);
 			statement.executeUpdate();
 		}
 		response.sendRedirect("http://localhost:8090/GroupProject/ProductServlet/reviews");
+	}
+
+	private void addNewFavourite(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		//Products
+		int id = Integer.parseInt(request.getParameter("id"));
+		Product existingProduct = new Product(id, "", "", "", "", "", "");
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PRODUCT_BY_ID);) {
+			preparedStatement.setLong(1, id);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				id = Integer.parseInt(rs.getString("id"));
+				String title = rs.getString("title");
+				String author = rs.getString("author");
+				String description = rs.getString("description");
+				String genre = rs.getString("genre");
+				String image = rs.getString("image");
+				String price = rs.getString("price");
+				existingProduct = new Product(id, title, author, description, genre, image, price);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		//User
+		HttpSession session = request.getSession();
+		String user = (String) session.getAttribute("Username");
+		System.out.println(user);
+		User existingUser = new User("", "", "", "", "", "", "", "", "", "");
+		try (Connection connection = getConnection();
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_NAME);) {
+			preparedStatement.setString(1, user);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+			// Step 4: Process the ResultSet object
+			while (rs.next()) {
+				user = rs.getString("Name");
+				String password = rs.getString("Password");
+				String dateofbirth = rs.getString("Date_Of_Birth");
+				String email = rs.getString("Email");
+				String phone = rs.getString("Phone_Number");
+				String address = rs.getString("Address");
+				String address2 = rs.getString("Address2");
+				String city = rs.getString("City");
+				String state = rs.getString("State");
+				String zip = rs.getString("Zip");
+				existingUser = new User(user, password, dateofbirth, email, phone, address, address2, city, state, zip);
+				System.out.println(existingUser.toString());
+				System.out.println(dateofbirth);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		request.setAttribute("user", existingUser);
+		request.setAttribute("product", existingProduct);
+		request.getRequestDispatcher("/addFavourite.jsp").forward(request, response);
+		System.out.println(existingProduct);
 	}
 }

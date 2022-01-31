@@ -41,6 +41,7 @@
 		<url-pattern>/ProductServlet/editReview</url-pattern>
 		<url-pattern>/ProductServlet/update</url-pattern>
 		<url-pattern>/ProductServlet/deleteReview</url-pattern>
+		<url-pattern>/ProductServlet/addFavourite</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

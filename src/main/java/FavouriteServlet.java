@@ -4,7 +4,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import project.Favourite;
+import project.User;
+
 import java.util.List;
 
 import java.io.PrintWriter;
@@ -26,9 +30,8 @@ public class FavouriteServlet extends HttpServlet {
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "password";
 
-	private static final String SELECT_ALL_FAVOURITES = "select * from FAVOURITES ";
+	private static final String SELECT_FAVOURITES_BY_NAME = "select * from FAVOURITES;";
 	private static final String DELETE_FAVOURITES_SQL = "delete from FAVOURITES where title = ?;";
-	private static final String UPDATE_USERS_SQL = "update FAVOURITES set name = ?,password= ?, email =?,language =? where name = ?;";
 
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -64,7 +67,7 @@ public class FavouriteServlet extends HttpServlet {
 		try {
 			switch (action) {
 			case "/FavouriteServlet/delete":
-				deleteFavourites(request,response);
+				deleteFavourites(request, response);
 				break;
 			case "/FavouriteServlet/dashboard":
 				listFavourites(request, response);
@@ -83,40 +86,15 @@ public class FavouriteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.setContentType("text/html");
-
-		PrintWriter out = response.getWriter();
-		String title = request.getParameter("title");
-		String author = request.getParameter("author");
-		String name = request.getParameter("name");
-
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "password");
-			PreparedStatement ps = con.prepareStatement("insert into FAVOURITES values(?,?,?)");
-			ps.setString(1, title);
-			ps.setString(2, author);
-			ps.setString(3, name);
-			int i = ps.executeUpdate();
-			if (i > 0) {
-				PrintWriter writer = response.getWriter();
-				writer.println("<h1>" + "Favourites added" + "</h1>");
-				writer.close();
-			}
-		} catch (Exception exception) {
-			System.out.println(exception);
-			out.close();
-		}
-
 		doGet(request, response);
 	}
 
 	private void listFavourites(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+
 		List<Favourite> favourites = new ArrayList<>();
 		try (Connection connection = getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_FAVOURITES);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FAVOURITES_BY_NAME);) {
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				String title = rs.getString("title");
@@ -131,7 +109,8 @@ public class FavouriteServlet extends HttpServlet {
 		request.getRequestDispatcher("/favouriteManagement.jsp").forward(request, response);
 	}
 
-	private void deleteFavourites(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+	private void deleteFavourites(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
 		String title = request.getParameter("title");
 		try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(DELETE_FAVOURITES_SQL);) {
@@ -140,5 +119,4 @@ public class FavouriteServlet extends HttpServlet {
 		}
 		response.sendRedirect("http://localhost:8090/GroupProject/FavouriteServlet/dashboard");
 	}
-
 }
