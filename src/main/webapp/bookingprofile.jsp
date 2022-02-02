@@ -49,7 +49,7 @@
 
 	<div class="row">
 		<div class="container">
-			<h3 class="text-center">Booking Details</h3>
+			<h3 class="text-center">Booking Details For You</h3>
 			<hr>
 
 			<br>
