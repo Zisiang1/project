@@ -138,7 +138,7 @@ public class ProductServlet extends HttpServlet {
 
 		var username = (String) session.getAttribute("Username");
 		System.out.println(username);
-
+		
 		String reviews = request.getParameter("reviews");
 		String ratings = request.getParameter("ratings");
 

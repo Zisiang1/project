@@ -170,6 +170,10 @@ body {
 							class="btn btn-primary profile-button" type="button">Delete
 							Account</button></a>
 				</div>
+				<div class="mt-5 text-center">
+					<a href="<%=request.getContextPath()%>/BookingServlet/book"><buttonB
+							class="btn btn-primary profile-button" type="button">See booking</button></a>
+				</div>
 			</div>
 		</div>
 
