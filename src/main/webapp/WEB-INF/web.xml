@@ -58,5 +58,12 @@
 	
 		
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>BookingServlet</servlet-name>
+		<url-pattern>/BookingServlet/book</url-pattern>
+	<url-pattern>/BookingServlet/delete</url-pattern>
+	
+		
+	</servlet-mapping>
 
 </web-app>
