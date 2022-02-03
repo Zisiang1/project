@@ -87,7 +87,7 @@
 							<td><c:out value="${product.image}" /></td>
 							<td><c:out value="${product.price}" /></td>							
 							<td><a href="productDetail?id=<c:out value="${product.id}" />">To product detail</a></td>
-							<td><a href="">Add to Favorite</a></td>
+							<td><a href="addFavourite?id=<c:out value="${product.id}"/>">Add to Favorite</a></td>
 							<!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
 							<!-- <td><a href="edit?name=<c:out value='${user.name}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a
