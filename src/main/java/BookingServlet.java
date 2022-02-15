@@ -73,7 +73,7 @@ public class BookingServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		HttpSession session = request.getSession();
-		var user = (String) session.getAttribute("Username");
+		String user = (String) session.getAttribute("Username");
 		
 		carts.clear();
 
