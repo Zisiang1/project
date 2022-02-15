@@ -23,7 +23,7 @@
   <form action="RegisterServlet"method="post" >
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="inputEmail4" class="font-weight-bold">Email</label>
+        <label for="inputEmail4" class="font-weight-bold">email</label>
         <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="Email" required>
         
 
