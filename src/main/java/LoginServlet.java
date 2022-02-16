@@ -83,7 +83,7 @@ public class LoginServlet extends HttpServlet {
 	        		
 	        		HttpSession session = request.getSession();
                     session.setAttribute("Username", name);
-                    var user= session.getAttribute("Username");
+                    String user= (String)session.getAttribute("Username");
                     System.out.println(user);
 
 	        		
