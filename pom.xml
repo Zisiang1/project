@@ -8,18 +8,14 @@
 	<packaging>war</packaging>
 	<name>GroupProject</name>
 	<description>Project</description>
-<properties>
- <maven.compiler.source>1.8</maven.compiler.source>
- <maven.compiler.target>1.8</maven.compiler.target>
- <java.version>1.8</java.version>
-</properties>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>1.8</java.version>
 
-		<!-- additional dependencies -->
+		<!-- additional dependenciess -->
 		<selenium.groupId>org.seleniumhq.selenium</selenium.groupId>
 		<selenium.artifactId>selenium-java</selenium.artifactId>
 		<selenium.version>2.53.1</selenium.version>
@@ -72,7 +68,6 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
@@ -91,6 +86,5 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		
 	</build>
 </project>
