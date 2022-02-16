@@ -14,7 +14,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>1.8</java.version>
 
-		<!-- additional dependencies -->
+		<!-- additional dependenciess -->
 		<selenium.groupId>org.seleniumhq.selenium</selenium.groupId>
 		<selenium.artifactId>selenium-java</selenium.artifactId>
 		<selenium.version>2.53.1</selenium.version>
