@@ -4,6 +4,8 @@
   <test thread-count="5" name="Test">
     <classes>
       <class name="com.sddevops.project.NewTest"/>
+      <class name="com.sddevops.project.ProductCollectionTest"/>
+      <class name="com.sddevops.project.ReviewCollectionTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
