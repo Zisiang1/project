@@ -6,8 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sddevops.project.User;
+
 import project.Favourite;
-import project.User;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package project;
+package com.sddevops.project;
 
 public class User {
 	protected String Name;
