@@ -6,6 +6,7 @@
       <class name="com.sddevops.project.NewTest"/>
       <class name="com.sddevops.project.ProductCollectionTest"/>
       <class name="com.sddevops.project.ReviewCollectionTest"/>
+      <class name="com.sddevops.project.CartCollectionTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
