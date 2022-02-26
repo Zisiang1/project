@@ -1,16 +1,25 @@
 pipeline {
     agent any
-    parameters {
-        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
-        booleanParam(name: 'executeTests', defaultValue: true, description: '')
-    }
+
     stages {
-        
-        stage("build") {
+        stage('Build') {
             steps {
-                echo'building the application'
-                bat 'clean install'
+                git 'https://github.com/Zisiang1/project.git'
+                //sh './mvnw clean compile'
+                bat '.\\mvnw clean compile'
             }
         }
-    }   
+        stage('Test') {
+            steps {
+                //sh './mvnw test'
+                bat '.\\mvnw test'
+            }
+
+            post {
+                always {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                }
+            }
+        }
+    }
 }
