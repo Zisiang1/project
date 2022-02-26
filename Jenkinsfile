@@ -9,22 +9,7 @@ pipeline {
         stage("build") {
             steps {
                 echo'building the application'
-            }
-        }
-        stage("test") {
-            when {
-                expression {
-                    params.executeTests
-                }
-            }
-            steps {
-                echo'testing the application'
-            }
-        }
-        stage("deploy") {
-            steps {
-               echo'deploying the application'
-              echo"deploying the version ${params.VERSION}"
+                bat 'clean install'
             }
         }
     }   
