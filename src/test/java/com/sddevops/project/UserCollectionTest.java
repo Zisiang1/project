@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
  * @author tayyu
  *
  */
-class UserCollectionTest {
+class UserCollectionTest { 
 	private UserCollection uc;
 	private User p1;
 	private User p2;
