@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Cart</title>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet"
@@ -49,7 +49,7 @@
 
 	<div class="row">
 		<div class="container">
-			<h3 class="text-center">Cart</h3>
+			<h3 class="text-center" id="cart" role="cartinfo">Cart</h3>
 			<hr>
 
 			<br>
