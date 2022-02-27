@@ -49,7 +49,7 @@
 
 	<div class="row">
 		<div class="container">
-			<h3 class="text-center">Cart</h3>
+			<h3 class="text-center" id="cart" role="cartinfo">Cart</h3>
 			<hr>
 
 			<br>
