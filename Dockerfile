@@ -1,4 +1,4 @@
 FROM openjdk:8
 EXPOSE 8070
-ADD target/test.jar test.jar
-ENTRYPOINT ["java", "-jar", "/test.jar"]
+ADD target/docker-jenkins.jar docker-jenkins.jar
+ENTRYPOINT ["java", "-jar", "/docker-jenkins.jar"]
