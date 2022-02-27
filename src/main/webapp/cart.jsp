@@ -54,7 +54,7 @@
 
 			<br>
 			<!-- Create a table to list out all current users information -->
-			<table class="table">
+			<table class="table" id="cart" role="cartinfo">
 				<thead>
 					<tr>
 						<th>Id</th>
