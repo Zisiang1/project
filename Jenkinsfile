@@ -1,18 +1,25 @@
-pipeline{
-	agent any
-	
-	stages{
-		stage("Build") {
-			steps{
-				sh "mvn -version"
-				sh "mvn clean install"
-			}
-		}
-	}
-	
-	post {
-		always {
-			cleanWs()
-		}
-	}
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                git 'https://github.com/Zisiang1/project.git'
+                //sh './mvnw clean compile'
+                bat 'clean compile'
+            }
+        }
+        stage('Test') {
+            steps {
+                //sh './mvnw test'
+                bat 'clean test'
+            }
+
+            post {
+                always {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                }
+            }
+        }
+    }
 }
