@@ -39,7 +39,6 @@ class CartCollectionTest {
 		cc.addCart(c4);
 
 		
-		
 	}
 
 	/**
