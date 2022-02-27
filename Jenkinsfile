@@ -15,6 +15,7 @@ pipeline {
                 bat 'clean test'
             }
 
+
             post {
                 always {
                     junit '**/target/surefire-reports/TEST-*.xml'
